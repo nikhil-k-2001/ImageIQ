@@ -1,7 +1,5 @@
 /* eslint-disable camelcase */
-// import { clerkClient } from "@clerk/nextjs/server";
 import { clerkClient } from "@clerk/clerk-sdk-node";
-
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -20,10 +18,10 @@ export async function POST(req: Request) {
   }
 
   // Get the headers
-  const headerPayload = headers();
-  const svix_id = (await headerPayload).get("svix-id");
-  const svix_timestamp = (await headerPayload).get("svix-timestamp");
-  const svix_signature = (await headerPayload).get("svix-signature");
+  const headerPayload = await headers();
+  const svix_id = headerPayload.get("svix-id");
+  const svix_timestamp = headerPayload.get("svix-timestamp");
+  const svix_signature = headerPayload.get("svix-signature");
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
@@ -64,22 +62,15 @@ export async function POST(req: Request) {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
 
-    // const user = {
-    //   clerkId: id,
-    //   email: email_addresses[0].email_address,
-    //   username: username!,
-    //   firstName: first_name,
-    //   lastName: last_name,
-    //   photo: image_url,
-    // };
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
-      username: username ?? "defaultUsername", // Default value if username is null or undefined
-      firstName: first_name ?? "", // Default empty string if first_name is null
-      lastName: last_name ?? "", // Default empty string if last_name is null
-      photo: image_url ?? "", // Default empty string if image_url is null
+      username: username!,
+      firstName: first_name ?? "", // Default to an empty string if null
+      lastName: last_name ?? "", // Default to an empty string if null
+      photo: image_url ?? "", // Default to an empty string if null
     };
+
 
     const newUser = await createUser(user);
 
@@ -100,10 +91,10 @@ export async function POST(req: Request) {
     const { id, image_url, first_name, last_name, username } = evt.data;
 
     const user = {
-      firstName: first_name || "", // Fallback to an empty string if null
-      lastName: last_name || "", // Fallback to an empty string if null
-      username: username || "defaultUsername", // Fallback to a default username
-      photo: image_url || "", // Fallback to an empty string if null
+      firstName: first_name ?? "", // Default to an empty string if null
+      lastName: last_name ?? "", // Default to an empty string if null
+      username: username!,
+      photo: image_url ?? "", // Default to an empty string if null
     };
 
     const updatedUser = await updateUser(id, user);
@@ -125,5 +116,3 @@ export async function POST(req: Request) {
 
   return new Response("", { status: 200 });
 }
-
-

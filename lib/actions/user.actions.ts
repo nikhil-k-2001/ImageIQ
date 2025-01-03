@@ -34,6 +34,7 @@ export async function getUserById(userId: string) {
   }
 }
 
+
 // UPDATE
 export async function updateUser(clerkId: string, user: UpdateUserParams) {
   try {

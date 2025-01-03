@@ -18,6 +18,9 @@ export async function POST(req: Request) {
     );
   }
 
+  // Create new Svix instance with secret
+  const wh = new Webhook(WEBHOOK_SECRET);
+
   // Get the headers
   const headerPayload = await headers();
   const svix_id = headerPayload.get("svix-id");
@@ -35,9 +38,6 @@ export async function POST(req: Request) {
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
-  // Create a new Svix instance with your secret.
-  const wh = new Webhook(WEBHOOK_SECRET);
-
   let evt: WebhookEvent;
 
   // Verify the payload with the headers
@@ -48,10 +48,10 @@ export async function POST(req: Request) {
       "svix-signature": svix_signature,
     }) as WebhookEvent;
   } catch (err) {
-    console.error("Error verifying webhook:", err);
-    return new Response("Error occured", {
+    console.error("Error: Could not verify webhook:", err);
+    return new Response("Error: Verification error", {
       status: 400,
-    });
+    })
   }
 
   // Get the ID and type

@@ -126,6 +126,7 @@ export const transformationTypes = {
     subTitle: "Refine images by removing noise and imperfections",
     config: { restore: true },
     icon: "image.svg",
+    
   },
   removeBackground: {
     type: "removeBackground",

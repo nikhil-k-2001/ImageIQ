@@ -30,7 +30,7 @@ export async function addImage({ image, userId, path }: AddImageParams) {
       ...image,
       author: author._id,
     })
-
+ 
     revalidatePath(path);
 
     return JSON.parse(JSON.stringify(newImage));

@@ -41,7 +41,8 @@ import { useRouter } from "next/navigation";
 import { InsufficientCreditsModal } from "./InsufficientCreditsModal";
 
 export const formSchema = z.object({
-  title: z.string(),
+  title: z.string().nonempty("Title is required"),
+  // title: z.string(),
   aspectRatio: z.string().optional(),
   color: z.string().optional(),
   prompt: z.string().optional(),
@@ -97,6 +98,7 @@ const TransformationForm = ({
 
       const imageData = {
         title: values.title,
+        alt: values.title,
         publicId: image?.publicId,
         transformationType: type,
         width: image?.width,
@@ -224,7 +226,7 @@ const TransformationForm = ({
             control={form.control}
             name="aspectRatio"
             formLabel="Aspect Ratio"
-            className="w-full"
+            className="w-full" 
             render={({ field }) => (
               <Select
                 onValueChange={(value) =>

@@ -21,16 +21,11 @@ const TransformedImage = ({ image, type, title, transformationConfig, isTransfor
   return (
     <div className="flex flex-col gap-4">
       <div className="flex-between">
-        <h3 className="h3-bold text-dark-600">
-          Transformed
-        </h3>
+        <h3 className="h3-bold text-dark-600">Transformed</h3>
 
         {hasDownload && (
-          <button 
-            className="download-btn" 
-            onClick={downloadHandler}
-          >
-            <Image 
+          <button className="download-btn" onClick={downloadHandler}>
+            <Image
               src="/assets/icons/download.svg"
               alt="Download"
               width={24}
@@ -43,11 +38,11 @@ const TransformedImage = ({ image, type, title, transformationConfig, isTransfor
 
       {image?.publicId && transformationConfig ? (
         <div className="relative">
-          <CldImage 
+          <CldImage
             width={getImageSize(type, image, "width")}
             height={getImageSize(type, image, "height")}
             src={image?.publicId}
-            alt={image.title}
+            alt={image?.title || "Transformed Image"} // Fallback added
             sizes={"(max-width: 767px) 100vw, 50vw"}
             placeholder={dataUrl as PlaceholderValue}
             className="transformed-image"
@@ -57,14 +52,14 @@ const TransformedImage = ({ image, type, title, transformationConfig, isTransfor
             onError={() => {
               debounce(() => {
                 setIsTransforming && setIsTransforming(false);
-              }, 8000)()
+              }, 8000)();
             }}
             {...transformationConfig}
           />
 
           {isTransforming && (
             <div className="transforming-loader">
-              <Image 
+              <Image
                 src="/assets/icons/spinner.svg"
                 width={50}
                 height={50}
@@ -74,13 +69,11 @@ const TransformedImage = ({ image, type, title, transformationConfig, isTransfor
             </div>
           )}
         </div>
-      ): (
-        <div className="transformed-placeholder">
-          Transformed Image
-        </div>
+      ) : (
+        <div className="transformed-placeholder">Transformed Image</div>
       )}
     </div>
-  )
+  );
 }
 
 export default TransformedImage

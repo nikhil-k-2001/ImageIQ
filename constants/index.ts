@@ -53,18 +53,18 @@ export const plans = [
         label: "20 Free Credits",
         isIncluded: true,
       },
-      {
-        label: "Basic Access to Services",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Customer Support",
-        isIncluded: false,
-      },
-      {
-        label: "Priority Updates",
-        isIncluded: false,
-      },
+      // {
+      //   label: "Basic Access to Services",
+      //   isIncluded: true,
+      // },
+      // {
+      //   label: "Priority Customer Support",
+      //   isIncluded: false,
+      // },
+      // {
+      //   label: "Priority Updates",
+      //   isIncluded: false,
+      // },
     ],
   },
   {
@@ -78,18 +78,18 @@ export const plans = [
         label: "120 Credits",
         isIncluded: true,
       },
-      {
-        label: "Full Access to Services",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Customer Support",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Updates",
-        isIncluded: false,
-      },
+      // {
+      //   label: "Full Access to Services",
+      //   isIncluded: true,
+      // },
+      // {
+      //   label: "Priority Customer Support",
+      //   isIncluded: true,
+      // },
+      // {
+      //   label: "Priority Updates",
+      //   isIncluded: false,
+      // },
     ],
   },
   {
@@ -103,18 +103,18 @@ export const plans = [
         label: "2000 Credits",
         isIncluded: true,
       },
-      {
-        label: "Full Access to Services",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Customer Support",
-        isIncluded: true,
-      },
-      {
-        label: "Priority Updates",
-        isIncluded: true,
-      },
+      // {
+      //   label: "Full Access to Services",
+      //   isIncluded: true,
+      // },
+      // {
+      //   label: "Priority Customer Support",
+      //   isIncluded: true,
+      // },
+      // {
+      //   label: "Priority Updates",
+      //   isIncluded: true,
+      // },
     ],
   },
 ];

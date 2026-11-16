@@ -57,6 +57,8 @@ const MediaUploader = ({
       options={{
         multiple: false,
         resourceType: "image",
+        // Only allow uploads from the device and its camera (no Drive, Dropbox, etc.)
+        sources: ["local", "camera"],
       }}
       onSuccess={onUploadSuccessHandler}
       onError={onUploadErrorHandler}
